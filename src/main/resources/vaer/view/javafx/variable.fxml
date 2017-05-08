@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+
+
+<HBox alignment="CENTER_LEFT" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vaer.view.javafx.VariableController">
+   <children>
+      <Label fx:id="name" prefWidth="100.0" text="Vaeriable" />
+      <HBox alignment="CENTER" minWidth="-Infinity">
+         <children>
+            <Label ellipsisString="" text="=" textOverrun="CLIP" />
+            <TextField fx:id="value" focusTraversable="false" prefWidth="75.0" />
+         </children>
+      </HBox>
+      <CheckBox fx:id="freeze" contentDisplay="RIGHT" focusTraversable="false" minWidth="-Infinity" mnemonicParsing="false" text="Freeze" />
+      <HBox alignment="CENTER" minWidth="-Infinity">
+         <children>
+            <Label text="RefreshRate: " />
+            <TextField fx:id="refreshRate" focusTraversable="false" prefWidth="60.0" />
+         </children>
+      </HBox>
+      <Button fx:id="closeButton" focusTraversable="false" minWidth="-Infinity" mnemonicParsing="false" text="X" textAlignment="CENTER" />
+   </children>
+</HBox>
