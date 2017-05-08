@@ -77,7 +77,7 @@ public class VaerController extends Application implements VaerView, GroupView, 
 		try {
 			this.stage = stage;
 			stage.setTitle(this.title);
-			FXMLLoader vaer = new FXMLLoader(getClass().getResource("./vaer.fxml"));
+			FXMLLoader vaer = new FXMLLoader(getClass().getResource("vaer.fxml"));
 			vaer.setController(this);
 			BorderPane rootPane = vaer.load();
 			setNode(rootPane);
