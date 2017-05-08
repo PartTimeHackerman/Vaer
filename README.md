@@ -8,9 +8,9 @@ Basic usage:
 Integer integer = 1;
 ...
 Variable<Integer> vaeriable = Vaer.get()
-										.group("Group 1")
-										.group("Group 2")
-										.variable("Int Variable");
+					.group("Group 1")
+					.group("Group 2")
+					.variable("Int Variable");
 vaeriable.setVariableSetter(this::set); //set integer setter
 vaeriable.setVariableGetter(this::get); //set integer getter
 vaeriable.setRefreshRate(200L); //set refresh rate in ms (default: 100ms)
@@ -28,7 +28,9 @@ setRefreshRate(200L);
 ```
 
 How to use:
-Go to https://jitpack.io/ :)
+1. Go to https://jitpack.io/ 
+2. ...
+3. Done! :)
 
 ToDo:
 - implementation of browser GUI in JS,
