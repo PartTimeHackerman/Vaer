@@ -41,5 +41,5 @@ setRefreshRate(200L);
 - implementation of browser GUI in JS,
 - implementation of `````@VaerVariable````` annotation processor for easy watching,
 - some refactoring
-- non-primitives wrapper with methods like ```? get()``` and ```set(? t)```
+- non-primitives/boxed wrapper with methods like ```? get()``` and ```set(? t)```
 
