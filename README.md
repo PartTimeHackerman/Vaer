@@ -33,7 +33,7 @@ setRefreshRate(200L);
 ```
 
 **How to use:**
-1. Go to https://jitpack.io/ 
+1. Go to https://jitpack.io/#WorstCoder/Vaer
 2. ...
 3. Done! :)
 
@@ -42,4 +42,5 @@ setRefreshRate(200L);
 - implementation of `````@VaerVariable````` annotation processor for easy watching,
 - some refactoring
 - non-primitives/boxed wrapper with methods like ```? get()``` and ```set(? t)```
+- TESTS!
 

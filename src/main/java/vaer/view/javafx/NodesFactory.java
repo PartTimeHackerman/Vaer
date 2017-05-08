@@ -28,7 +28,7 @@ public class NodesFactory {
 	
 	public static VariableController createVariableView(String name) {
 		try {
-			FXMLLoader variableLoader = new FXMLLoader(groupLoaderURL);
+			FXMLLoader variableLoader = new FXMLLoader(variableLoaderURL);
 			Node variableNode = variableLoader.load();
 			VariableController variableController = variableLoader.getController();
 			variableController.setName(name);
