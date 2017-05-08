@@ -9,8 +9,8 @@ import java.net.URL;
 
 public class NodesFactory {
 	
-	private static final URL groupLoaderURL = NodesFactory.class.getResource("./group.fxml");
-	private static final URL variableLoaderURL = NodesFactory.class.getResource("./variable.fxml");
+	private static final URL groupLoaderURL = NodesFactory.class.getResource("group.fxml");
+	private static final URL variableLoaderURL = NodesFactory.class.getResource("variable.fxml");
 	
 	public static GroupController createGroupView(String name) {
 		try {
