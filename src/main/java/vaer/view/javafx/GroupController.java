@@ -64,42 +64,18 @@ public class GroupController implements GroupView, NodeView<Node> {
 	
 	@Override
 	public GroupView group(String name) {
-		try {
-			FXMLLoader groupLoader = new FXMLLoader(getClass().getResource("./group.fxml"));
-			Node groupNode = groupLoader.load();
-			GroupController groupController = groupLoader.getController();
-			groupController.setNode(groupNode);
-			groupController.setName(name);
-			groupController.setParent(this);
-			/*groupController.setParent(parent);
-			groupController.setGroup(group);
-			content.getChildren().add(groupNode);*/
-			addChild(groupController);
-			return groupController;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
+		GroupController groupController = NodesFactory.createGroupView(name);
+		groupController.setParent(this);
+		addChild(groupController);
+		return groupController;
 	}
 	
 	@Override
 	public VariableView variable(String name) {
-		try {
-			FXMLLoader variableLoader = new FXMLLoader(getClass().getResource("./variable.fxml"));
-			Node variableNode = variableLoader.load();
-			VariableController variableController = variableLoader.getController();
-			variableController.setName(name);
-			variableController.setNode(variableNode);
-			variableController.setParent(this);
-			addChild(variableController);
-			/*variableController.setParent(parent);
-			variableController.setVariable(variable);
-			content.getChildren().add(variableNode);*/
-			return variableController;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
+		VariableController variableController = NodesFactory.createVariableView(name);
+		variableController.setParent(this);
+		addChild(variableController);
+		return variableController;
 	}
 	
 	
