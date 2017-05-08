@@ -3,10 +3,15 @@ Vaer
 Vaer is simple **va**riable watch**er**, allowing to watch, edit and freeze any variable in real time.
 Default view is made in JavaFx, but it's easy to implement new one ( I'll implement another in JS in near future).
 
-Basic usage:
+**Basic usage:**
 ```
 Integer integer = 1;
 ...
+/* Create structure like:
+   Group 1
+   |    Group 2
+   |    |   Int Variable    =[ 123  ]    [ ] Freeze  Refresh rate: [ 200 ]   [X]
+ */
 Variable<Integer> vaeriable = Vaer.get()
 					.group("Group 1")
 					.group("Group 2")
@@ -15,7 +20,7 @@ vaeriable.setVariableSetter(this::set); //set integer setter
 vaeriable.setVariableGetter(this::get); //set integer getter
 vaeriable.setRefreshRate(200L); //set refresh rate in ms (default: 100ms)
 ```
-Tips for variables:
+**Tips for variables:**
 ```
 //Get variable if exists, otherwise create new one with given name
 variable("Int Variable");
@@ -27,12 +32,12 @@ variableNew("Int Variable");
 setRefreshRate(200L);
 ```
 
-How to use:
+**How to use:**
 1. Go to https://jitpack.io/ 
 2. ...
 3. Done! :)
 
-ToDo:
+**ToDo:**
 - implementation of browser GUI in JS,
 - implementation of `````@VaerVariable````` annotation processor for easy watching,
 - some refactoring
