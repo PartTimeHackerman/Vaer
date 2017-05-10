@@ -16,10 +16,10 @@ import vaer.model.Variable;
 public class VariableController implements VariableView, NodeView<Node> {
 	
 	@FXML
-	private Label name;
+	private Label variableNameLabel;
 	
 	@FXML
-	private TextField value;
+	private TextField valueTextField;
 	
 	@FXML
 	private CheckBox freeze;
@@ -45,27 +45,22 @@ public class VariableController implements VariableView, NodeView<Node> {
 			freeze(newValue);
 		});
 		
-		//value.setStyle("-fx-prompt-text-fill: derive(-fx-control-inner-background, -50%);");
-		
-		value.selectedTextProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue.equals(""))
-				variable.setVariableValue(newValue);
-		});
-		
-		value.focusedProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue)
-				value.setText("");
-			else if (!value.getText().equals("")) {
-				String val = value.getText();
+		valueTextField.focusedProperty().addListener((observable, oldValue, focused) -> {
+			if (focused) {
+				valueTextField.setPromptText(valueTextField.getText().equals("") ? valueTextField.getPromptText() : valueTextField.getText());
+				valueTextField.setText("");
+			} else if (!valueTextField.getText().equals("")) {
+				String val = valueTextField.getText();
 				setVariableValue(val);
 			}
 		});
 		
-		refreshRate.setOnKeyReleased(event -> {
-			if (event.getCode().equals(KeyCode.ENTER)) {
+		refreshRate.focusedProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue) {
 				try {
-					Long refreshR = Long.parseLong(refreshRate.getText());
-					setVariableRefreshRate(refreshR);
+					Long newRefreshRate = Long.parseLong(refreshRate.getText());
+					if (newRefreshRate > 0)
+						setVariableRefreshRate(newRefreshRate);
 				} catch (Exception e) {
 				}
 			}
@@ -73,11 +68,11 @@ public class VariableController implements VariableView, NodeView<Node> {
 	}
 	
 	public Label getNameLabel() {
-		return name;
+		return variableNameLabel;
 	}
 	
 	public TextField getValueField() {
-		return value;
+		return valueTextField;
 	}
 	
 	public void setParent(GroupView parent) {
@@ -90,17 +85,19 @@ public class VariableController implements VariableView, NodeView<Node> {
 	
 	@Override
 	public <T> void setValue(T value) {
-		synchronized (this.value) {
-			if (!this.value.isFocused())
-				Platform.runLater(() -> this.value.setText(value.toString()));
-			else
-				Platform.runLater(() -> this.value.setPromptText(value.toString()));
+		synchronized (this.valueTextField) {
+			Platform.runLater(() -> {
+				if (!this.valueTextField.isFocused())
+					this.valueTextField.setText(value.toString());
+				else
+					this.valueTextField.setPromptText(value.toString());
+			});
 		}
 	}
 	
 	@Override
 	public void setVariableValue() {
-		String input = this.value.getText();
+		String input = this.valueTextField.getText();
 		if (!input.equals(""))
 			variable.setVariableValue(input);
 	}
@@ -140,12 +137,12 @@ public class VariableController implements VariableView, NodeView<Node> {
 	
 	@Override
 	public void setName(String name) {
-		this.name.setText(name);
+		this.variableNameLabel.setText(name);
 	}
 	
 	@Override
 	public String getName() {
-		return this.name.getText();
+		return this.variableNameLabel.getText();
 	}
 	
 	@Override

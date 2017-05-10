@@ -14,11 +14,11 @@
          <items>
             <HBox alignment="CENTER_LEFT">
                <children>
-                  <Label fx:id="name" minWidth="75.0" prefWidth="9999.0" text="Vaeriable" />
+                  <Label fx:id="variableNameLabel" minWidth="75.0" prefWidth="9999.0" text="Vaeriable" />
                   <Label ellipsisString="" text="=" textOverrun="CLIP" />
                </children>
             </HBox>
-            <TextField fx:id="value" focusTraversable="false" minWidth="75.0" prefWidth="9999.0" />
+            <TextField fx:id="valueTextField" focusTraversable="false" minWidth="75.0" prefWidth="9999.0" />
          </items>
       </SplitPane>
       <CheckBox fx:id="freeze" contentDisplay="RIGHT" focusTraversable="false" minWidth="56.0" mnemonicParsing="false" text="Freeze" />
