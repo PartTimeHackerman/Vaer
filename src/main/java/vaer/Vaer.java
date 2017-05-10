@@ -9,49 +9,51 @@ import java.util.Vector;
 
 public class Vaer {
 	
-	private final VaerModel model;
 	private static Vaer mainVaer;
 	private static final Vector<Vaer> vaerInstances = new Vector<>();
-	private static final String defaultName = "Vaer";
+	private static String defaultName = "Vaer";
+	private static Class<? extends VaerView> defaultView = VaerController.class;
 	
-	private String name;
+	private final VaerModel model;
+	private final String name;
 	
-	private Vaer(String name, VaerView view) {
-		this.model = VaerFactory.getDefault(name, view);
+	private Vaer(String name, Class<? extends VaerView> viewClass) {
+		this.model = VaerFactory.getDefaultModel(name, viewClass);
 		this.name = name;
 	}
 	
-	public static Vaer get(final String name) {
-		return get(name, new VaerController(name));
+	
+	public static Vaer get() {
+		return get(defaultName, defaultView);
 	}
 	
-	public static Vaer get(final String name, VaerView view) {
+	public static Vaer get(final String name) {
+		return get(name, defaultView);
+	}
+	
+	public static Vaer get(Class<? extends VaerView> viewClass) {
+		return get(defaultName, viewClass);
+	}
+	
+	public static Vaer get(final String name, Class<? extends VaerView> viewClass) {
 		Vaer vaer;
 		
 		if (name == null || name.equals(""))
-			return get();
+			return get(defaultName, viewClass);
 		
 		synchronized (vaerInstances) {
 			Optional<Vaer> vaerOptional = vaerInstances.stream()
 					.filter(v -> v.getName().equals(name))
 					.findFirst();
-			vaer = vaerOptional.orElseGet(() -> new Vaer(name, view));
+			vaer = vaerOptional.orElseGet(() -> new Vaer(name, viewClass));
 			if (mainVaer == null)
 				mainVaer = vaer;
+			vaerInstances.add(vaer);
 		}
 		return vaer;
 	}
 	
-	public static Vaer get() {
-		if (mainVaer == null) {
-			synchronized (Vaer.class) {
-				if (mainVaer == null) {
-					mainVaer = new Vaer(defaultName, new VaerController(defaultName));
-				}
-			}
-		}
-		return mainVaer;
-	}
+	
 	
 	public Group group(String groupName) {
 		return model.group(groupName);
@@ -63,5 +65,25 @@ public class Vaer {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public Variable<Integer> variableNew(String variableName) {
+		return model.variableNew(variableName);
+	}
+	
+	public static String getDefaultName() {
+		return defaultName;
+	}
+	
+	public static void setDefaultName(String defaultName) {
+		Vaer.defaultName = defaultName;
+	}
+	
+	public static Class<? extends VaerView> getDefaultView() {
+		return defaultView;
+	}
+	
+	public static void setDefaultView(Class<? extends VaerView> defaultView) {
+		Vaer.defaultView = defaultView;
 	}
 }
