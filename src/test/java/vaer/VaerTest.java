@@ -27,6 +27,14 @@ public class VaerTest {
 										   vaeriable.setRefreshRate(10L);
 									   });
 		
+		IntStream.range(0, 3).forEach(i ->
+									   {
+										   Variable<Integer> vaeriable = Vaer.get("New window").variableNew("Int Variable");
+										   vaeriable.setVariableSetter(this::set);
+										   vaeriable.setVariableGetter(this::get);
+										   vaeriable.setRefreshRate(10L);
+									   });
+		
 		new TimeInterval().addInterval(() -> integer++, 1000L);
 		
 		System.in.read();
