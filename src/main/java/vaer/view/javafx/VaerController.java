@@ -2,15 +2,20 @@ package vaer.view.javafx;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import vaer.Vaer;
 import vaer.model.Group;
 import vaer.view.NodeView;
 import vaer.view.VaerView;
@@ -19,14 +24,17 @@ import vaer.view.VariableView;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.Objects;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
 public class VaerController extends Application implements VaerView, GroupView, NodeView<Node> {
 	
-	private static Stage mainStage;
+	private static Boolean javaFxInitialized = false;
+	private static Stage mainJavaFxStage;
+	private final static ExecutorService javaFxThread = Executors.newSingleThreadExecutor();
 	
 	@FXML
 	private VBox content;
@@ -39,60 +47,120 @@ public class VaerController extends Application implements VaerView, GroupView, 
 	
 	private Node node;
 	
-	public VaerController(){}
+	private Boolean initialized = false;
 	
-	public VaerController(String title) {
-		this.title = title;
-		if (mainStage != null) {
-			Platform.runLater(() -> initStage(new Stage()));
-		} else {
-			initMainStage();
-			Platform.runLater(() -> initStage(mainStage));
-		}
+	private Boolean resizing = false;
+	
+	public VaerController() {
 	}
 	
-	private void initMainStage() {
-		Executors.newSingleThreadExecutor().submit(() -> {
-			try {
-				launch();
-			} catch (IllegalStateException e) {
-				Platform.runLater(() -> mainStage = new Stage());
-			}
-		});
-		while (mainStage == null) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+	public VaerController(String title) {
+		initialize(title);
+	}
+	
+	public void initialize(String title) {
+		this.title = title;
+		initStage();
+		waitForInitialization();
+	}
+	
+	private void initStage() {
+		if (javaFxInitialized) {
+			Platform.runLater(() -> stage = new Stage());
+		} else {
+			stage = initJavaFx();
 		}
+		
+		Platform.runLater(this::setUpStage);
+	}
+	
+	private Stage initJavaFx() {
+		javaFxThread.submit(() ->
+							{
+								try {
+									launch(); //invokes start()
+								} catch (IllegalStateException e) {
+									Platform.runLater(() -> mainJavaFxStage = new Stage());
+									javaFxInitialized = true;
+								}
+							});
+		waitForJavaFxInitialization();
+		stage = mainJavaFxStage;
+		return stage;
 	}
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		mainStage = stage;
+		mainJavaFxStage = stage;
+		javaFxInitialized = true;
 	}
 	
-	private void initStage(Stage stage) {
+	private void setUpStage() {
+		stage.setTitle(this.title);
+		stage.getIcons().add(new Image(getClass().getResource("vaer_icon.png").toExternalForm()));
+		stage.setOnCloseRequest(event -> close());
+		Scene scene = setUpScene();
+		stage.setScene(scene);
+		stage.show();
+		
+		setUpStageResizing();
+		
+		
+		
+		initialized = true;
+	}
+	
+	private Scene setUpScene() {
+		BorderPane rootPane = loadFXML();
+		setNode(rootPane);
+		Scene scene = new Scene(rootPane);
+		scene.getStylesheets().add(getClass().getResource("modena_dark.css").toExternalForm());
+		return scene;
+	}
+	
+	private BorderPane loadFXML() {
 		try {
-			this.stage = stage;
-			stage.setTitle(this.title);
 			FXMLLoader vaer = new FXMLLoader(getClass().getResource("vaer.fxml"));
 			vaer.setController(this);
-			BorderPane rootPane = vaer.load();
-			setNode(rootPane);
-			Scene scene = new Scene(rootPane);
-			scene.getStylesheets().add(getClass().getResource("modena_dark.css").toExternalForm());
-			stage.getIcons().add(new Image(getClass().getResource("vaer_icon.png").toExternalForm()));
-			stage.setOnCloseRequest(event -> close());
-			stage.setScene(scene);
-			stage.show();
-			
+			return vaer.load();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 	
+	private void setUpStageResizing() {
+		
+		content.getChildren().addListener((ListChangeListener<Node>) c -> {
+			stageResize();
+		});
+		
+		content.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
+			if (!resizing)
+				stageResize();
+		});
+		
+		content.heightProperty().addListener((observable, oldValue, newValue) -> {
+			if (!resizing)
+				stage.setHeight(newValue.doubleValue());
+		});
+		
+		stage.widthProperty().addListener((observable, oldValue, newValue) -> {
+			resizing = !Objects.equals(oldValue.intValue(), newValue.intValue());
+		});
+		
+		stage.heightProperty().addListener((observable, oldValue, newValue) -> {
+			resizing = !Objects.equals(oldValue.intValue(), newValue.intValue()) ;
+		});
+	}
+	
+	private void stageResize() {
+		Platform.runLater(() -> {
+			stage.sizeToScene();
+			stage.setMinWidth(stage.getWidth());
+			stage.setMinHeight(stage.getHeight());
+		});
+	}
 	
 	@Override
 	public GroupView group(String groupName) {
@@ -100,16 +168,14 @@ public class VaerController extends Application implements VaerView, GroupView, 
 		Platform.runLater(() -> content.getChildren().add(groupView.getNode()));
 		groupView.setParent(this);
 		childrens.add(groupView);
-		groupView.getNode().boundsInParentProperty().addListener(observable -> {
-			Platform.runLater(() -> stage.sizeToScene());
-		});
 		return groupView;
 	}
 	
 	@Override
 	public VariableView variable(String variableName) {
 		VariableController variableController = NodesFactory.createVariableView(variableName);
-		content.getChildren().add(variableController.getNode());
+		Platform.runLater(() -> content.getChildren().add(variableController.getNode()));
+		variableController.setParent(this);
 		childrens.add(variableController);
 		return variableController;
 	}
@@ -117,7 +183,7 @@ public class VaerController extends Application implements VaerView, GroupView, 
 	@Override
 	public <T> void removeChild(NodeView<T> child) {
 		childrens.remove(child);
-		Platform.runLater(()-> content.getChildren().remove(child.getNode()));
+		Platform.runLater(() -> content.getChildren().remove(child.getNode()));
 	}
 	
 	@Override
@@ -153,4 +219,23 @@ public class VaerController extends Application implements VaerView, GroupView, 
 		}
 	}
 	
+	private void waitForJavaFxInitialization() {
+		while (!javaFxInitialized) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void waitForInitialization() {
+		while (!initialized) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

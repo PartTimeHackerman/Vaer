@@ -28,13 +28,13 @@
             <Insets bottom="5.0" />
          </VBox.margin>
         </HBox>
-        <HBox fx:id="contentsToHide" spacing="5.0">
+        <HBox fx:id="contentsToHide" prefWidth="450.0" spacing="5.0">
             <VBox.margin>
                 <Insets left="10.0" />
             </VBox.margin>
             <children>
                 <Separator orientation="VERTICAL" />
-                <VBox fx:id="content" alignment="CENTER_LEFT" spacing="5.0" />
+                <VBox fx:id="content" alignment="CENTER_LEFT" prefWidth="9999.0" spacing="5.0" />
             </children>
         </HBox>
     </children>

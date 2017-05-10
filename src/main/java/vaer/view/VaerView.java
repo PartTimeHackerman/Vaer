@@ -5,4 +5,6 @@ public interface VaerView {
 	GroupView group(String groupName);
 	
 	VariableView variable(String variableName);
+	
+	void initialize(String title);
 }

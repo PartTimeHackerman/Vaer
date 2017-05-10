@@ -54,3 +54,23 @@
 .scroll-bar > .decrement-button:pressed > .decrement-arrow {
     -fx-background-color: -fx-mark-highlight-color, rgb(255, 255, 255);
 }
+
+.split-pane *.split-pane-divider {
+    /*-fx-padding: 0 1 0 1;*/
+    -fx-opacity: .1;
+}
+
+.split-pane{
+    -fx-box-border: transparent;
+}
+
+.text-field {
+    -fx-text-box-border: transparent;
+    -fx-background-radius: 0;
+    -fx-border-insets: 0;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 1;
+    -fx-border-color: transparent transparent rgba(255, 255, 255,.5) transparent;
+    -fx-background-color: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
+}
+
