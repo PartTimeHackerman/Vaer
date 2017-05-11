@@ -84,6 +84,7 @@ public class VaerController extends Application implements VaerView, GroupView, 
 									javaFxInitialized = true;
 								}
 							});
+		Platform.setImplicitExit(false);
 		waitForJavaFxInitialization();
 		stage = mainJavaFxStage;
 		return stage;
@@ -105,12 +106,10 @@ public class VaerController extends Application implements VaerView, GroupView, 
 		
 		setUpStageResizing();
 		
-		
-		
 		initialized = true;
 	}
 	
-	private Scene setUpScene() {
+	protected Scene setUpScene() {
 		BorderPane rootPane = loadFXML();
 		setNode(rootPane);
 		Scene scene = new Scene(rootPane);
@@ -158,7 +157,7 @@ public class VaerController extends Application implements VaerView, GroupView, 
 		Platform.runLater(() -> {
 			stage.sizeToScene();
 			stage.setMinWidth(stage.getWidth());
-			stage.setMinHeight(stage.getHeight());
+			//stage.setMinHeight(stage.getHeight());
 		});
 	}
 	
