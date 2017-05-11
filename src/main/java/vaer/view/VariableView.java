@@ -16,4 +16,6 @@ public interface VariableView {
 	
 	<T> void setVariable(Variable<T> variable);
 	
+	void editable(Boolean editable);
+	
 }

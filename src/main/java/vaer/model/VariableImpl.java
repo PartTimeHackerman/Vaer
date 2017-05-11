@@ -50,6 +50,7 @@ class VariableImpl<T> implements Variable<T>, Viewable<VariableView>{
 	@Override
 	public Variable<T> setVariableSetter(Consumer<T> consumer) {
 		this.variableSetter = consumer;
+		view.editable(true);
 		return this;
 	}
 	
@@ -165,6 +166,7 @@ class VariableImpl<T> implements Variable<T>, Viewable<VariableView>{
 		this.view = view;
 		this.view.setVariable(this);
 		this.view.setRefreshRate(refreshRate);
+		this.view.editable(false);
 	}
 	
 	@Override

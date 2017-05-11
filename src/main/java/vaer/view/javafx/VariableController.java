@@ -130,6 +130,13 @@ public class VariableController implements VariableView, NodeView<Node> {
 	}
 	
 	@Override
+	public void editable(Boolean editable) {
+		valueTextField.setEditable(editable);
+		valueTextField.setMouseTransparent(!editable);
+		freeze.setDisable(!editable);
+	}
+	
+	@Override
 	public void close() {
 		variable.dispose();
 		parent.removeChild(this);
