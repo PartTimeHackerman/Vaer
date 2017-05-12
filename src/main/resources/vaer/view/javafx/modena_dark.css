@@ -42,7 +42,7 @@
 /* Fix scroll bar buttons arrows colors */
 .scroll-bar > .increment-button > .increment-arrow,
 .scroll-bar > .decrement-button > .decrement-arrow {
-    -fx-background-color: -fx-mark-highlight-color, rgb(220, 220, 220);
+    -fx-background-color: transparent;
 }
 
 .scroll-bar > .increment-button:hover > .increment-arrow,
@@ -53,6 +53,30 @@
 .scroll-bar > .increment-button:pressed > .increment-arrow,
 .scroll-bar > .decrement-button:pressed > .decrement-arrow {
     -fx-background-color: -fx-mark-highlight-color, rgb(255, 255, 255);
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button{
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 10 0 0;
+
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding:0;
+}
+
+.scroll-bar .track{
+    -fx-max-width: 2px;
+    -fx-background-color: #404040;
+}
+
+.scroll-bar .thumb {
+    -fx-max-width: 2px;
+    -fx-background-color: #cacaca;
 }
 
 .split-pane *.split-pane-divider {
@@ -77,3 +101,4 @@
 .text-field:focused{
     -fx-border-color: transparent transparent rgba(127, 240, 255, 0.5) transparent;
 }
+
