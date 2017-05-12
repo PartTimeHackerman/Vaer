@@ -2,9 +2,6 @@ package vaer.view.javafx;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import vaer.Vaer;
 import vaer.model.Group;
 import vaer.view.NodeView;
 import vaer.view.VaerView;
@@ -28,7 +23,6 @@ import java.util.Objects;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 
 public class VaerController extends Application implements VaerView, GroupView, NodeView<Node> {
 	
@@ -43,7 +37,7 @@ public class VaerController extends Application implements VaerView, GroupView, 
 	
 	private Stage stage;
 	
-	private String title;
+	protected String title;
 	
 	private Node node;
 	
@@ -60,30 +54,30 @@ public class VaerController extends Application implements VaerView, GroupView, 
 	
 	public void initialize(String title) {
 		this.title = title;
-		initStage();
+		getNewStage();
+		Platform.runLater(this::setUpStage);
 		waitForInitialization();
 	}
 	
-	private void initStage() {
-		if (javaFxInitialized) {
+	private void getNewStage() {
+		stage = initJavaFx();
+		if (stage == null)
 			Platform.runLater(() -> stage = new Stage());
-		} else {
-			stage = initJavaFx();
-		}
-		
-		Platform.runLater(this::setUpStage);
 	}
 	
-	private Stage initJavaFx() {
+	protected synchronized Stage initJavaFx() {
+		if (javaFxInitialized)
+			return null;
+		
 		javaFxThread.submit(() ->
 							{
 								try {
 									launch(); //invokes start()
 								} catch (IllegalStateException e) {
-									Platform.runLater(() -> mainJavaFxStage = new Stage());
 									javaFxInitialized = true;
 								}
 							});
+		
 		Platform.setImplicitExit(false);
 		waitForJavaFxInitialization();
 		stage = mainJavaFxStage;
@@ -100,16 +94,15 @@ public class VaerController extends Application implements VaerView, GroupView, 
 		stage.setTitle(this.title);
 		stage.getIcons().add(new Image(getClass().getResource("vaer_icon.png").toExternalForm()));
 		stage.setOnCloseRequest(event -> close());
-		Scene scene = setUpScene();
+		Scene scene = getScene();
 		stage.setScene(scene);
 		stage.show();
-		
 		setUpStageResizing();
 		
 		initialized = true;
 	}
 	
-	protected Scene setUpScene() {
+	protected Scene getScene() {
 		BorderPane rootPane = loadFXML();
 		setNode(rootPane);
 		Scene scene = new Scene(rootPane);
@@ -149,7 +142,7 @@ public class VaerController extends Application implements VaerView, GroupView, 
 		});
 		
 		stage.heightProperty().addListener((observable, oldValue, newValue) -> {
-			resizing = !Objects.equals(oldValue.intValue(), newValue.intValue()) ;
+			resizing = !Objects.equals(oldValue.intValue(), newValue.intValue());
 		});
 	}
 	
