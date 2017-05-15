@@ -98,7 +98,8 @@ public class VaerController extends Application implements VaerView, GroupView, 
 		stage.setScene(scene);
 		stage.show();
 		setUpStageResizing();
-		
+		stage.setWidth(500);
+		stage.setHeight(400);
 		initialized = true;
 	}
 	
@@ -132,10 +133,10 @@ public class VaerController extends Application implements VaerView, GroupView, 
 				stageResize();
 		});
 		
-		content.heightProperty().addListener((observable, oldValue, newValue) -> {
+		/*content.heightProperty().addListener((observable, oldValue, newValue) -> {
 			if (!resizing)
 				stage.setHeight(newValue.doubleValue());
-		});
+		});*/
 		
 		stage.widthProperty().addListener((observable, oldValue, newValue) -> {
 			resizing = !Objects.equals(oldValue.intValue(), newValue.intValue());
@@ -148,8 +149,8 @@ public class VaerController extends Application implements VaerView, GroupView, 
 	
 	private void stageResize() {
 		Platform.runLater(() -> {
-			stage.sizeToScene();
-			stage.setMinWidth(stage.getWidth());
+			//stage.sizeToScene();
+			//stage.setMinWidth(stage.getWidth());
 			//stage.setMinHeight(stage.getHeight());
 		});
 	}

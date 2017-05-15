@@ -1,5 +1,6 @@
 package vaer;
 
+import com.sun.webkit.plugin.PluginManager;
 import vaer.model.TimeInterval;
 import vaer.model.Variable;
 import vaer.model.annotation.VaerVariable;
@@ -29,7 +30,6 @@ public class Test {
 									   });
 		
 		new TimeInterval().addInterval(() -> integer++, 1000L);
-		
 		System.in.read();
 	}
 	

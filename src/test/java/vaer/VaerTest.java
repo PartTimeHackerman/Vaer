@@ -15,6 +15,11 @@ public class VaerTest {
 	
 	@Test
 	public void createStage() throws IOException {
+		Variable<Integer> v = Vaer.get()
+				.group("Group 1")
+				.group("Group 2")
+				.variableNew("Int Variable");
+		v.setVariableGetter(this::get);
 		
 		IntStream.range(0, 10).forEach(i ->
 									   {
@@ -24,7 +29,7 @@ public class VaerTest {
 												   .variableNew("Int Variable");
 										   vaeriable.setVariableSetter(this::set);
 										   vaeriable.setVariableGetter(this::get);
-										   vaeriable.setRefreshRate(10L);
+										   vaeriable.setRefreshRate(100L);
 									   });
 		
 		IntStream.range(0, 3).forEach(i ->
@@ -32,7 +37,7 @@ public class VaerTest {
 										   Variable<Integer> vaeriable = Vaer.get("New window").variableNew("Int Variable");
 										   vaeriable.setVariableSetter(this::set);
 										   vaeriable.setVariableGetter(this::get);
-										   vaeriable.setRefreshRate(10L);
+										   vaeriable.setRefreshRate(100L);
 									   });
 		
 		new TimeInterval().addInterval(() -> integer++, 1000L);
