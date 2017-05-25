@@ -40,7 +40,7 @@ public class VaerTest {
 										   vaeriable.setRefreshRate(100L);
 									   });
 		
-		new TimeInterval().addInterval(() -> integer++, 1000L);
+		TimeInterval.addInterval(() -> integer++, 1000L);
 		
 		System.in.read();
 	}

@@ -16,8 +16,8 @@ class VariableImpl<T> implements Variable<T>, Viewable<VariableView>{
 	private Group parent;
 	
 	private T variable;
-	private Timer refresher;
-	private Timer freezer;
+	private TimeInterval.Job refresher;
+	private TimeInterval.Job freezer;
 	
 	private Boolean freezed = false;
 	private Long refreshRate = 100L;
@@ -114,7 +114,7 @@ class VariableImpl<T> implements Variable<T>, Viewable<VariableView>{
 			freezer.cancel();
 		
 		if (getVariableSetter() != null)
-			freezer = new TimeInterval().addInterval(this::updateFreeze, refreshRate);
+			freezer = TimeInterval.addInterval(this::updateFreeze, refreshRate);
 		else
 			System.out.println("No setter!");
 	}
@@ -130,7 +130,7 @@ class VariableImpl<T> implements Variable<T>, Viewable<VariableView>{
 			refresher.cancel();
 		
 		if (getVariableGetter() != null)
-			refresher = new TimeInterval().addInterval(this::updateView, refreshRate);
+			refresher = TimeInterval.addInterval(this::updateView, refreshRate);
 		else
 			System.out.println("No getter!");
 	}

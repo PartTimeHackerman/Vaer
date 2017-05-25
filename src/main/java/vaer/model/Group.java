@@ -16,7 +16,7 @@ public interface Group extends Node {
 	
 	/*
 	*	Create new variable with given name, append to parent and return
-	*	If variable with given name already exists, add postfix to variable name like "_i", where "i" is the number of repeated variable
+	*	If variable with given name already exists, addRunnable postfix to variable name like "_i", where "i" is the number of repeated variable
 	*	Example variable("var") -> var, variableNew("var") -> var_1, variableNew("var") -> var_2
 	 */
 	<T> Variable<T> variableNew(String variableName);
