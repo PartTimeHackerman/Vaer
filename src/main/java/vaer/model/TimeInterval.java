@@ -60,7 +60,9 @@ public class TimeInterval {
 		void runJobsIfTimeIsRight() {
 			if (elapsedTime >= maxTime) {
 				elapsedTime = 0L;
-				jobs.forEach(job -> job.runnable.run());
+				for (int i = 0; i < jobs.size(); i++) {
+					jobs.get(i).runnable.run();
+				}
 			}
 		}
 	}
