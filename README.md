@@ -33,7 +33,7 @@ setRefreshRate(200L);
 ```
 
 **How to use:**
-1. Go to https://jitpack.io/#WorstCoder/Vaer
+1. Go to https://jitpack.io/#PartTimeHackerman/Vaer
 2. ...
 3. Done! :)
 
