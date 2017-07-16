@@ -1,5 +1,9 @@
 Vaer
 ===
+[![Build Status](https://travis-ci.org/PartTimeHackerman/Vaer.svg?branch=master)](https://travis-ci.org/PartTimeHackerman/Vaer)
+[![codebeat badge](https://codebeat.co/badges/3f460a22-3286-46b4-87b9-22611ead7113)](https://codebeat.co/projects/github-com-parttimehackerman-vaer-master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c320e7331b2f43689f464ed20be48ccd)](https://www.codacy.com/app/kuriozalnie/Vaer?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=PartTimeHackerman/Vaer&amp;utm_campaign=Badge_Grade)
+
 Vaer is simple **va**riable watch**er**, allowing to watch, edit and freeze any variable in real time.
 Default view is made in JavaFx, but it's easy to implement new one ( I'll implement another in JS in near future).
 
