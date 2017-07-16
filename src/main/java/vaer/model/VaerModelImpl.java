@@ -7,11 +7,11 @@ class VaerModelImpl extends GroupAbstract implements Viewable<VaerView>, VaerMod
 	private String name;
 	private VaerView view;
 	
-	public VaerModelImpl(){
+	public VaerModelImpl() {
 		super();
 	}
 	
-	public VaerModelImpl(final String name, VaerView view){
+	public VaerModelImpl(final String name, VaerView view) {
 		super();
 		initialize(name, view);
 	}
@@ -24,13 +24,13 @@ class VaerModelImpl extends GroupAbstract implements Viewable<VaerView>, VaerMod
 	}
 	
 	@Override
-	public void setName(String name) {
-		this.name = name;
+	public String getName() {
+		return name;
 	}
 	
 	@Override
-	public String getName() {
-		return name;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	@Override
@@ -58,12 +58,12 @@ class VaerModelImpl extends GroupAbstract implements Viewable<VaerView>, VaerMod
 	}
 	
 	@Override
-	public void setView(VaerView view) {
-		this.view = view;
+	public VaerView getView() {
+		return view;
 	}
 	
 	@Override
-	public VaerView getView() {
-		return view;
+	public void setView(VaerView view) {
+		this.view = view;
 	}
 }

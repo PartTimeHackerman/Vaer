@@ -1,8 +1,6 @@
 package vaer.view;
 
 import vaer.model.Group;
-import vaer.view.javafx.JavaFxNode;
-import vaer.view.javafx.VariableController;
 
 public interface GroupView {
 	

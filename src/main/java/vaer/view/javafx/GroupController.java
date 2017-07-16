@@ -2,7 +2,6 @@ package vaer.view.javafx;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -13,32 +12,23 @@ import vaer.view.GroupView;
 import vaer.view.NodeView;
 import vaer.view.VariableView;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.Vector;
 
 public class GroupController implements GroupView, NodeView<Node> {
 	
+	List<NodeView> childrens = new Vector<>();
 	@FXML
 	private Label name;
-	
 	@FXML
 	private HBox head;
-	
 	@FXML
 	private Polygon wrapArrow;
 	private Boolean open = true;
-	
 	@FXML
 	private HBox contentsToHide;
-	
 	@FXML
 	private VBox content;
-	
-	List<NodeView> childrens = new Vector<>();
-	
 	private Node groupNode;
 	
 	private GroupView parent;
@@ -106,6 +96,10 @@ public class GroupController implements GroupView, NodeView<Node> {
 		parent.removeChild(this);
 	}
 	
+	@Override
+	public String getName() {
+		return this.name.getText();
+	}
 	
 	@Override
 	public void setName(String name) {
@@ -113,8 +107,8 @@ public class GroupController implements GroupView, NodeView<Node> {
 	}
 	
 	@Override
-	public String getName() {
-		return this.name.getText();
+	public Node getNode() {
+		return groupNode;
 	}
 	
 	@Override
@@ -122,16 +116,11 @@ public class GroupController implements GroupView, NodeView<Node> {
 		this.groupNode = node;
 	}
 	
-	@Override
-	public Node getNode() {
-		return groupNode;
+	public GroupView getParent() {
+		return parent;
 	}
 	
 	public void setParent(GroupView parent) {
 		this.parent = parent;
-	}
-	
-	public GroupView getParent() {
-		return parent;
 	}
 }

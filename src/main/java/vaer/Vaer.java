@@ -1,6 +1,9 @@
 package vaer;
 
-import vaer.model.*;
+import vaer.model.Group;
+import vaer.model.VaerFactory;
+import vaer.model.VaerModel;
+import vaer.model.Variable;
 import vaer.view.VaerView;
 import vaer.view.javafx.VaerController;
 
@@ -9,8 +12,8 @@ import java.util.Vector;
 
 public class Vaer {
 	
-	private static Vaer mainVaer;
 	private static final Vector<Vaer> vaerInstances = new Vector<>();
+	private static Vaer mainVaer;
 	private static String defaultName = "Vaer";
 	private static Class<? extends VaerView> defaultView = VaerController.class;
 	
@@ -53,7 +56,21 @@ public class Vaer {
 		return vaer;
 	}
 	
+	public static String getDefaultName() {
+		return defaultName;
+	}
 	
+	public static void setDefaultName(String defaultName) {
+		Vaer.defaultName = defaultName;
+	}
+	
+	public static Class<? extends VaerView> getDefaultView() {
+		return defaultView;
+	}
+	
+	public static void setDefaultView(Class<? extends VaerView> defaultView) {
+		Vaer.defaultView = defaultView;
+	}
 	
 	public Group group(String groupName) {
 		return model.group(groupName);
@@ -69,21 +86,5 @@ public class Vaer {
 	
 	public Variable<Integer> variableNew(String variableName) {
 		return model.variableNew(variableName);
-	}
-	
-	public static String getDefaultName() {
-		return defaultName;
-	}
-	
-	public static void setDefaultName(String defaultName) {
-		Vaer.defaultName = defaultName;
-	}
-	
-	public static Class<? extends VaerView> getDefaultView() {
-		return defaultView;
-	}
-	
-	public static void setDefaultView(Class<? extends VaerView> defaultView) {
-		Vaer.defaultView = defaultView;
 	}
 }

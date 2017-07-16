@@ -37,7 +37,7 @@ abstract class GroupAbstract implements Group {
 	public <T> VariableImpl<T> variableNew(final String variableName) {
 		Integer counter = 0;
 		String name = variableName;
-		while (getVariable(name).isPresent()){
+		while (getVariable(name).isPresent()) {
 			counter++;
 			name = variableName + "_" + counter;
 		}

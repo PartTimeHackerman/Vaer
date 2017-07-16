@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
-
-<HBox alignment="CENTER_LEFT" maxHeight="31.0" prefWidth="450.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vaer.view.javafx.VariableController">
-   <children>
-      <SplitPane dividerPositions="0.5">
-         <items>
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <Label fx:id="variableNameLabel" minWidth="75.0" prefWidth="9999.0" text="Vaeriable" />
-                  <Label ellipsisString="" text="=" textOverrun="CLIP" />
-               </children>
-            </HBox>
-            <TextField fx:id="valueTextField" focusTraversable="false" minWidth="75.0" prefWidth="9999.0" />
-         </items>
-      </SplitPane>
-      <CheckBox fx:id="freeze" contentDisplay="RIGHT" focusTraversable="false" minWidth="56.0" mnemonicParsing="false" text="Freeze" />
-      <HBox alignment="CENTER" minWidth="130.0">
-         <children>
-            <Label text="RefreshRate: " />
-            <TextField fx:id="refreshRate" focusTraversable="false" prefWidth="60.0" />
-         </children>
-      </HBox>
-      <Button fx:id="closeButton" focusTraversable="false" minWidth="25.0" mnemonicParsing="false" text="X" textAlignment="CENTER" />
-   </children>
+<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER_LEFT" maxHeight="31.0" prefWidth="450.0" spacing="10.0"
+      xmlns="http://javafx.com/javafx/8.0.131" fx:controller="vaer.view.javafx.VariableController">
+    <children>
+        <SplitPane dividerPositions="0.5">
+            <items>
+                <HBox alignment="CENTER_LEFT">
+                    <children>
+                        <Label fx:id="variableNameLabel" minWidth="75.0" prefWidth="9999.0" text="Vaeriable"/>
+                        <Label ellipsisString="" text="=" textOverrun="CLIP"/>
+                    </children>
+                </HBox>
+                <TextField fx:id="valueTextField" focusTraversable="false" minWidth="75.0" prefWidth="9999.0"/>
+            </items>
+        </SplitPane>
+        <CheckBox fx:id="freeze" contentDisplay="RIGHT" focusTraversable="false" minWidth="56.0" mnemonicParsing="false"
+                  text="Freeze"/>
+        <HBox alignment="CENTER" minWidth="130.0">
+            <children>
+                <Label text="RefreshRate: "/>
+                <TextField fx:id="refreshRate" focusTraversable="false" prefWidth="60.0"/>
+            </children>
+        </HBox>
+        <Button fx:id="closeButton" focusTraversable="false" minWidth="25.0" mnemonicParsing="false" text="X"
+                textAlignment="CENTER"/>
+    </children>
 </HBox>

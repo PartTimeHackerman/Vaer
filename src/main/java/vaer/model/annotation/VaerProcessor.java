@@ -19,10 +19,10 @@ public class VaerProcessor extends AbstractProcessor {
 	@Override
 	public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 		
-		for (Element element : roundEnv.getElementsAnnotatedWith(VaerVariable.class)){
+		for (Element element : roundEnv.getElementsAnnotatedWith(VaerVariable.class)) {
 			VaerVariable vaerAnnotation = element.getAnnotation(VaerVariable.class);
 			String message = element.getSimpleName() + " " + vaerAnnotation.name();
-			try{
+			try {
 				PrintWriter writer = new PrintWriter("itsjustfortests.txt", "UTF-8");
 				writer.println(message);
 				writer.close();

@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.Double?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Polygon?>
-
-<VBox alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vaer.view.javafx.GroupController">
+<?import java.lang.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/8.0.131"
+      fx:controller="vaer.view.javafx.GroupController">
     <children>
         <HBox fx:id="head" alignment="CENTER_LEFT" spacing="5.0">
             <children>
-                <Label fx:id="name" text="Name" />
-                <Polygon fx:id="wrapArrow" fill="#a1a1a1" rotate="180.0" stroke="#0000003c" strokeMiterLimit="0.0" strokeType="INSIDE">
+                <Label fx:id="name" text="Name"/>
+                <Polygon fx:id="wrapArrow" fill="#a1a1a1" rotate="180.0" stroke="#0000003c" strokeMiterLimit="0.0"
+                         strokeType="INSIDE">
                     <points>
-                        <Double fx:value="-5.0" />
-                        <Double fx:value="4.0" />
-                        <Double fx:value="5.0" />
-                        <Double fx:value="4.0" />
-                        <Double fx:value="0.0" />
-                        <Double fx:value="-6.0" />
+                        <Double fx:value="-5.0"/>
+                        <Double fx:value="4.0"/>
+                        <Double fx:value="5.0"/>
+                        <Double fx:value="4.0"/>
+                        <Double fx:value="0.0"/>
+                        <Double fx:value="-6.0"/>
                     </points>
                 </Polygon>
             </children>
-         <VBox.margin>
-            <Insets bottom="5.0" />
-         </VBox.margin>
+            <VBox.margin>
+                <Insets bottom="5.0"/>
+            </VBox.margin>
         </HBox>
         <HBox fx:id="contentsToHide" prefWidth="450.0" spacing="5.0">
             <VBox.margin>
-                <Insets left="10.0" />
+                <Insets left="10.0"/>
             </VBox.margin>
             <children>
-                <Separator orientation="VERTICAL" />
-                <VBox fx:id="content" alignment="CENTER_LEFT" prefWidth="9999.0" spacing="5.0" />
+                <Separator orientation="VERTICAL"/>
+                <VBox fx:id="content" alignment="CENTER_LEFT" prefWidth="9999.0" spacing="5.0"/>
             </children>
         </HBox>
     </children>

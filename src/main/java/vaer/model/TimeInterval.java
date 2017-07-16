@@ -26,7 +26,8 @@ public class TimeInterval {
 			if (timer != null)
 				try {
 					timer.cancel();
-				} catch (Exception ignored) {}
+				} catch (Exception ignored) {
+				}
 			timer = new Timer();
 			timer.scheduleAtFixedRate(updateJobs, 0L, minPeroid);
 		}

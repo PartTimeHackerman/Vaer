@@ -1,6 +1,5 @@
 package vaer.view.javafx;
 
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 

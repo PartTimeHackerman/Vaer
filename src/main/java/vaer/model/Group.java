@@ -1,7 +1,5 @@
 package vaer.model;
 
-import javafx.scene.Parent;
-
 public interface Group extends Node {
 	
 	/*

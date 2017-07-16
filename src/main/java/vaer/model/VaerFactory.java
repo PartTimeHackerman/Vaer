@@ -4,11 +4,11 @@ import vaer.view.VaerView;
 
 public class VaerFactory {
 	
-	public static VaerModel getDefaultModel(String name, Class<? extends VaerView> viewClass){
-			return getModelByClass(name, VaerModelImpl.class, viewClass);
+	public static VaerModel getDefaultModel(String name, Class<? extends VaerView> viewClass) {
+		return getModelByClass(name, VaerModelImpl.class, viewClass);
 	}
 	
-	public static VaerModel getModelByClass(String name, Class<? extends VaerModel> modelClass, Class<? extends VaerView> viewClass){
+	public static VaerModel getModelByClass(String name, Class<? extends VaerModel> modelClass, Class<? extends VaerView> viewClass) {
 		try {
 			VaerView view = viewClass.newInstance();
 			view.initialize(name);

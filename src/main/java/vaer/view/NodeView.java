@@ -1,14 +1,14 @@
 package vaer.view;
 
-import javafx.scene.Node;
-
 public interface NodeView<T> {
 	
-	void setName(String name);
 	String getName();
 	
-	void setNode(T node);
+	void setName(String name);
+	
 	T getNode();
+	
+	void setNode(T node);
 	
 	void close();
 }

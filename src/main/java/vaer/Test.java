@@ -1,12 +1,9 @@
 package vaer;
 
-import com.sun.webkit.plugin.PluginManager;
 import vaer.model.TimeInterval;
 import vaer.model.Variable;
-import vaer.model.annotation.VaerVariable;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.stream.IntStream;
 
 public class Test {

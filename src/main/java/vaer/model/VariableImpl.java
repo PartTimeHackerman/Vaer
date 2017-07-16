@@ -2,11 +2,10 @@ package vaer.model;
 
 import vaer.view.VariableView;
 
-import java.util.Timer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-class VariableImpl<T> implements Variable<T>, Viewable<VariableView>{
+class VariableImpl<T> implements Variable<T>, Viewable<VariableView> {
 	
 	private String name;
 	private VariableView view;
@@ -26,13 +25,13 @@ class VariableImpl<T> implements Variable<T>, Viewable<VariableView>{
 	}
 	
 	@Override
-	public void setName(String name) {
-		this.name = name;
+	public String getName() {
+		return this.name;
 	}
 	
 	@Override
-	public String getName() {
-		return this.name;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	@Override
@@ -65,16 +64,16 @@ class VariableImpl<T> implements Variable<T>, Viewable<VariableView>{
 	}
 	
 	@Override
-	public Variable<T> setVariableValue(T value) {
-		variableSetter.accept(value);
-		return this;
-	}
-	
-	@Override
 	public void setVariableValue(String value) {
 		variable = StringCaster.getValue(value, variable.getClass());
 		if (variableSetter != null)
 			variableSetter.accept(variable);
+	}
+	
+	@Override
+	public Variable<T> setVariableValue(T value) {
+		variableSetter.accept(value);
+		return this;
 	}
 	
 	@Override
@@ -151,14 +150,18 @@ class VariableImpl<T> implements Variable<T>, Viewable<VariableView>{
 	}
 	
 	@Override
+	public Group getParent() {
+		return parent;
+	}
+	
+	@Override
 	public void setParent(Group parent) {
 		this.parent = parent;
 	}
 	
-	
 	@Override
-	public Group getParent() {
-		return parent;
+	public VariableView getView() {
+		return view;
 	}
 	
 	@Override
@@ -167,11 +170,6 @@ class VariableImpl<T> implements Variable<T>, Viewable<VariableView>{
 		this.view.setVariable(this);
 		this.view.setRefreshRate(refreshRate);
 		this.view.editable(false);
-	}
-	
-	@Override
-	public VariableView getView() {
-		return view;
 	}
 }
 

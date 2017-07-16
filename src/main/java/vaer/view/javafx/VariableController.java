@@ -7,11 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
+import vaer.model.Variable;
 import vaer.view.GroupView;
 import vaer.view.NodeView;
 import vaer.view.VariableView;
-import vaer.model.Variable;
 
 public class VariableController implements VariableView, NodeView<Node> {
 	
@@ -75,12 +74,12 @@ public class VariableController implements VariableView, NodeView<Node> {
 		return valueTextField;
 	}
 	
-	public void setParent(GroupView parent) {
-		this.parent = parent;
-	}
-	
 	public GroupView getParent() {
 		return parent;
+	}
+	
+	public void setParent(GroupView parent) {
+		this.parent = parent;
 	}
 	
 	@Override
@@ -143,22 +142,22 @@ public class VariableController implements VariableView, NodeView<Node> {
 	}
 	
 	@Override
-	public void setName(String name) {
-		this.variableNameLabel.setText(name);
-	}
-	
-	@Override
 	public String getName() {
 		return this.variableNameLabel.getText();
 	}
 	
 	@Override
-	public void setNode(Node node) {
-		this.variableNode = node;
+	public void setName(String name) {
+		this.variableNameLabel.setText(name);
 	}
 	
 	@Override
 	public Node getNode() {
 		return variableNode;
+	}
+	
+	@Override
+	public void setNode(Node node) {
+		this.variableNode = node;
 	}
 }

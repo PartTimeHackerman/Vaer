@@ -4,7 +4,8 @@ import javafx.scene.Node;
 
 public interface JavaFxNode {
 	
-	void setNode(Node node);
 	Node getNode();
+	
+	void setNode(Node node);
 	
 }

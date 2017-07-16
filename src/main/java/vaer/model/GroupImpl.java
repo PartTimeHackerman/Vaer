@@ -2,7 +2,7 @@ package vaer.model;
 
 import vaer.view.GroupView;
 
-class GroupImpl extends GroupAbstract implements Viewable<GroupView>, Child<Group>{
+class GroupImpl extends GroupAbstract implements Viewable<GroupView>, Child<Group> {
 	
 	private String name;
 	private GroupView view;
@@ -35,6 +35,10 @@ class GroupImpl extends GroupAbstract implements Viewable<GroupView>, Child<Grou
 		return variable;
 	}
 	
+	@Override
+	public Group getParent() {
+		return parent;
+	}
 	
 	@Override
 	public void setParent(Group parent) {
@@ -42,8 +46,8 @@ class GroupImpl extends GroupAbstract implements Viewable<GroupView>, Child<Grou
 	}
 	
 	@Override
-	public Group getParent() {
-		return parent;
+	public GroupView getView() {
+		return view;
 	}
 	
 	@Override
@@ -53,18 +57,13 @@ class GroupImpl extends GroupAbstract implements Viewable<GroupView>, Child<Grou
 	}
 	
 	@Override
-	public GroupView getView() {
-		return view;
+	public String getName() {
+		return this.name;
 	}
 	
 	@Override
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	@Override
-	public String getName() {
-		return this.name;
 	}
 	
 	@Override

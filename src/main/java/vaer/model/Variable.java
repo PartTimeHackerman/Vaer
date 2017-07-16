@@ -5,16 +5,19 @@ import java.util.function.Supplier;
 
 public interface Variable<T> extends Child<Group>, Node {
 	
-	Variable<T> setVariableGetter(Supplier<T> supplier);
 	Supplier<T> getVariableGetter();
 	
-	Variable<T> setVariableSetter(Consumer<T> consumer);
+	Variable<T> setVariableGetter(Supplier<T> supplier);
+	
 	Consumer<T> getVariableSetter();
+	
+	Variable<T> setVariableSetter(Consumer<T> consumer);
 	
 	T getVariableValue();
 	
-	Variable<T> setVariableValue(T value);
 	void setVariableValue(String value);
+	
+	Variable<T> setVariableValue(T value);
 	
 	Variable<T> setRefreshRate(Long refreshRate);
 	

@@ -3,10 +3,8 @@ package vaer;
 import org.junit.Test;
 import vaer.model.TimeInterval;
 import vaer.model.Variable;
-import vaer.model.annotation.VaerVariable;
 
 import java.io.IOException;
-import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
 public class VaerTest {
@@ -33,12 +31,12 @@ public class VaerTest {
 									   });
 		
 		IntStream.range(0, 3).forEach(i ->
-									   {
-										   Variable<Integer> vaeriable = Vaer.get("New window").variableNew("Int Variable");
-										   vaeriable.setVariableSetter(this::set);
-										   vaeriable.setVariableGetter(this::get);
-										   vaeriable.setRefreshRate(100L);
-									   });
+									  {
+										  Variable<Integer> vaeriable = Vaer.get("New window").variableNew("Int Variable");
+										  vaeriable.setVariableSetter(this::set);
+										  vaeriable.setVariableGetter(this::get);
+										  vaeriable.setRefreshRate(100L);
+									  });
 		
 		TimeInterval.addInterval(() -> integer++, 1000L);
 		

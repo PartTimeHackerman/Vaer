@@ -1,7 +1,5 @@
 package vaer.model;
 
-import vaer.model.Group;
-import vaer.model.Variable;
 import vaer.view.VaerView;
 
 public interface VaerModel {

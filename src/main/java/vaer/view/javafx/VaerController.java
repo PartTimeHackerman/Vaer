@@ -12,9 +12,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import vaer.model.Group;
+import vaer.view.GroupView;
 import vaer.view.NodeView;
 import vaer.view.VaerView;
-import vaer.view.GroupView;
 import vaer.view.VariableView;
 
 import java.io.IOException;
@@ -26,19 +26,14 @@ import java.util.concurrent.Executors;
 
 public class VaerController extends Application implements VaerView, GroupView, NodeView<Node> {
 	
+	private final static ExecutorService javaFxThread = Executors.newSingleThreadExecutor();
 	private static Boolean javaFxInitialized = false;
 	private static Stage mainJavaFxStage;
-	private final static ExecutorService javaFxThread = Executors.newSingleThreadExecutor();
-	
+	protected String title;
+	List<NodeView> childrens = new Vector<>();
 	@FXML
 	private VBox content;
-	
-	List<NodeView> childrens = new Vector<>();
-	
 	private Stage stage;
-	
-	protected String title;
-	
 	private Node node;
 	
 	private Boolean initialized = false;
@@ -185,23 +180,23 @@ public class VaerController extends Application implements VaerView, GroupView, 
 	}
 	
 	@Override
-	public void setName(String name) {
-		this.title = name;
-	}
-	
-	@Override
 	public String getName() {
 		return title;
 	}
 	
 	@Override
-	public void setNode(Node node) {
-		this.node = node;
+	public void setName(String name) {
+		this.title = name;
 	}
 	
 	@Override
 	public Node getNode() {
 		return node;
+	}
+	
+	@Override
+	public void setNode(Node node) {
+		this.node = node;
 	}
 	
 	@Override

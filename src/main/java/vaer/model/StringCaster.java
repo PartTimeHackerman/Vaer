@@ -3,7 +3,7 @@ package vaer.model;
 public class StringCaster {
 	
 	@SuppressWarnings("unchecked")
-	public static <T> T getValue(String input, Class clazz){
+	public static <T> T getValue(String input, Class clazz) {
 		T variable = null;
 		if (clazz.isAssignableFrom(String.class)) {
 			variable = (T) input;
